@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gabin CROZET - Portfolio</title>
+<style>
+:root {
+    --color-bg: #f6f8fa;
+    --color-primary: #1a73e8;
+    --color-secondary: #34a853;
+    --color-accent: #fbbc05;
+    --color-danger: #ea4335;
+    --color-cloud: #6c63ff;
+    --color-proj: #00bfae;
+    --color-text: #222;
+    --color-footer: #222;
+    --color-footer-text: #fff;
+	--color-bd: #994C00;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+header {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    position: relative;
+    top: 0;
+    z-index: 100;
+}
+
+main .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+
+section {
+    margin-bottom: 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.logoIUT{
+	border-radius: 4px;
+    padding: 5px;
+    width: 250px;
+    height: auto;
+    display: block;
+	margin-left: -10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+}
+
+nav .menu {
+    display: flex;
+    gap: 1.2rem; /* réduit l'espace entre les boutons */
+    margin-left: auto; /* pousse le menu à droite */
+}
+
+nav .menu li {
+    list-style: none;
+}
+
+nav .menu a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+nav .menu a:hover {
+    background: var(--color-bg);
+    color: var(--color-primary);
+}
+
+/* Présentation */
+
+.mapresentation{
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #222;
+  max-width: 700px;
+  margin: 2em auto 1em auto;
+  text-align: justify;
+  background: #f9f9f9;
+  padding: 1.2em 2em;
+  border-radius: 10px;
+  box-shadow:  0 2px 8px rgba(0,0,0,0.07);
+  transition: box-shadow 0.3s;
+}
+
+.mapresentation:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Compétences */
+
+.competence-box {
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    margin-bottom: 0;
+    overflow: hidden;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.competence-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.competence-header {
+    padding: 1rem 1rem;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.competence-header.sys { background-color: var(--color-primary); }
+.competence-header.net { background-color: var(--color-secondary); }
+.competence-header.sec { background-color: var(--color-danger); }
+.competence-header.cloud { background-color: var(--color-cloud); }
+.competence-header.dev { background-color: var(--color-accent); color: #222; }
+.competence-header.proj { background-color: var(--color-proj); }
+.competence-header.bd { background-color: var(--color-bd); }
+
+
+
+.competence-list {
+    padding: 0.7rem 1.2rem 1rem 1.2rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--color-text);
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+.competence-list li {
+    margin-bottom: 0.5rem;
+}
+
+.competences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem 2rem;
+    justify-content: center;
+    margin-top: 0;
+	justify-items: center;
+}
+
+/* Projets */
+.projets-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.projet {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 1rem;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.projet:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pastilles {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0.7rem;
+    flex-wrap: wrap;
+}
+
+.pastille {
+    display: inline-block;
+    padding: 0.35em 1em;
+    border-radius: 20px;
+    font-size: 0.95em;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2em;
+}
+.pastille.sys { background: var(--color-primary); }
+.pastille.net { background: var(--color-secondary); }
+.pastille.sec { background: var(--color-danger); }
+.pastille.cloud { background: var(--color-cloud);}
+.pastille.dev { background: var(--color-accent); color: #222;}
+.pastille.proj { background: var(--color-proj); }
+.pastille.bd { background: var(--color-bd);}
+
+
+footer {
+    background: var(--color-footer);
+    color: var(--color-footer-text);
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+footer .socials a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.7rem;
+    font-size: 1.2rem;
+    transition: color 0.2s;
+}
+
+footer .socials a:hover {
+    color: var(--color-primary);
+}
+
+@media (max-width: 700px) {
+    nav ul { gap: 1rem; }
+    .projets-grid { gap: 1rem; }
+    main .container { padding: 1rem 0.5rem; }
+}
+</style>
+</head>
+<body>
+<header>
+    <nav>
+		<img src="logoIUT.jpg" alt="Logo de l'IUT Lyon 1" class="logoIUT">
+		<ul class="menu">
+			<li><a href="#presentation">Présentation</a></li>
+			<li><a href="#competences">Compétences</a></li>
+			<li><a href="#projets">Projets</a></li>
+		</ul>
+    </nav>
+</header>
+
+<main>
+    <!-- Présentation -->
+    <section id="presentation">
+		<h1>Qui suis-je ?</h1>
+			<div class="mapresentation">
+				<p>
+					&emsp;Je m'appel Gabin et je suis actuellement étudiant en deuxième année à l’IUT Informatique,
+					où je poursuis le parcours DACS (Déploiement d’Applications Communicantes et Sécurisées).<br><br>
+					&emsp;Passionné par les réseaux informatique et par leur gestion, leur administration ou encore leur sécurisation,
+					j’ai choisi cette spécialisation afin d’acquérir des compétences solides dans la création et le déploiement de services 
+					applicatifs sécurisés, en virtualisation, ou encore en réseau.<br><br>
+					&emsp;En plus des compétences acquises en cours, le cursus que je suis me permet d'acquérir des compétences en entreprise.
+					Ces compétences sont pour la plus part des compétences que je n'aurais pas pu acquérir si je suivais un cursus classique 
+					me permettant ainsi d'enrichir mes compétences à travers des éléments plus concret.<br><br>
+					&emsp;De plus j’ai eu l’opportunité de travailler sur divers projets que ce soit en cours comme en entreprise. 
+					Ces projet consistaien à mettre en place des architectures sécurisées, migrer des services au sein même de mon entreprise,
+					ou administrer ces services et leurs utilisateurs.<br><br>
+					&emsp;Curieux, rigoureux et toujours à la recherche de nouveaux défis, je souhaite mettre à profit mes connaissances techniques 
+					à travers l'exercice de métiers comme administrateur système et réseau ou encore RSSI.<br><br>
+					&emsp;C'est pourquoi, ce portfolio a pour objectif de mettre en valeur mes compétences, mes réalisations et mon parcours afin de 
+					réaliser mon objectif.
+				</p>
+			</div>
+    </section>
+
+    <!-- Compétences -->
+    <section id="competences">
+    <div class="container">
+        <h2>Mes Compétences</h2>
+        <div class="competences-grid">
+            <div class="competence-box">
+                <div class="competence-header sys">Systèmes</div>
+                <ul class="competence-list">
+                    <li>Créer, faire évoluer et maintenir un système informatique communicant opérationnel</li>
+					<li>Maîtriser l'architecture d'un système (Debian, Ubuntu, Windows, macOS)</li>
+					<li>Configurer des services de communication (Apache, Nginx, Traefik)</li>
+                    <li>Gérer un Active Directory</li>
+                    <li>Gestion des sauvegardes</li>
+                </ul>
+            </div>
+
+            <div class="competence-box">
+                <div class="competence-header net">Réseaux</div>
+                <ul class="competence-list">
+					<li>Créer, faire évoluer et maintenir un système informatique communicant opérationnel)</li>
+					<li>Maîtriser l'architecture de réseaux</li>
+                    <li>Configurer des systèmes communicants (TCP/IP, VLAN, DHCP, DNS, OSPF/HSRP, PVST, VTP, NAT-PAT)</li>
+                    <li>Configuration de routeurs et commutateurs Cisco</li>
+                    <li>VPN (GlobalProtect, PaloAlto)</li>
+                </ul>
+            </div>
+
+            <div class="competence-box">
+                <div class="competence-header sec">Sécurité</div>
+                <ul class="competence-list">
+                    <li>Sécuriser un système d'information</li>
+                    <li>Administration de firewall et création de règle de filtrage (PaloAlto)</li>
+                    <li>Création de directives permettant de définir une politique de sécurité</li>
+                </ul>
+            </div>
+
+            <div class="competence-box">
+                <div class="competence-header cloud">Virtualisation & Conteneurisation</div>
+                <ul class="competence-list">
+                    <li>Utilisation d'outils de virtualisation de type 1 (Proxmox)</li>
+                    <li>Utilisation d'outils de virtualisation de type 2 (VMware, VirtualBox)</li>
+                    <li>Utilisation d'outils de conteneurisation (Docker, Docker Swarm, Portainer)</li>
+                </ul>
+            </div>
+
+			<div class="competence-box">
+                <div class="competence-header bd">Gestion de base de données</div>
+                <ul class="competence-list">
+                    <li>Concevoir, gérer, administrer et exploiter les données de l’information</li>
+                    <li>Concevoir et mettre en place une base de données (SQL, PL/SQL, MongoDB)</li>
+					<li>Organiser la restitution de données à travers la programmation et la visualisation</li>
+                </ul>
+            </div>
+
+            <div class="competence-box">
+                <div class="competence-header dev">Scripts & Développement bas niveau</div>
+                <ul class="competence-list">
+					<li>Développer, coder, tester et intégrer une solution informatique (Bash, Python, C)</li>
+                    <li>Veiller à la qualité du code et à sa documentation</li>
+					<li>Choisir les ressources techniques appropriées</li>
+					<li>S’appuyer sur des schémas de raisonnement</li>
+                    <li>Gestion et déploiement de configurations (Ansible, Docker, Docker Swarm, Portainer)</li>
+                </ul>
+            </div>
+
+            <div class="competence-box">
+                <div class="competence-header proj">Gestion de projet & Soft Skills</div>
+                <ul class="competence-list">
+                    <li>Documentation technique et reporting (Procédures, Documentation)</li>
+                    <li>Organiser et piloter un projet informatique avec des méthodes classiques (Kanban, Gantt, PERT, Modèle en V/W, AGILE)</li>
+                    <li>Appliquer une démarche de suivi de projet en fonction des besoins métiers des clients et des utilisateurs (Comptes-rendus d'activité, Tableau d'avancement)</li>
+					<li>Formaliser les besoins du client et de l’utilisateur (Mise en place d'un cahier des charges)</li>
+                    <li>Communiquer et travailler en équipe</li>
+					<li>Anglais (Niveau B2)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Projets -->
+    <section id="projets">
+        <div class="container">
+            <h2>Projets Réalisés</h2>
+            <div class="projets-grid">
+                <div class="projet">
+                    <h3>SAé 3.01 : Création et déploiement de services applicatifs</h3>
+                    <p>
+					Le projet a été réalisé en groupe. Nous avons utilisé d'une machine virtuelle Ubuntu pour mettre en place un serveur
+					web Apache, pour ensuite effectuer une attaque de type DoS (Deny of Service). L'objectif de ce projet était de comprendre 
+					comment fonctionne Apache et quel sont les moyens de sécurité que ce service utilise. Nous avons ensuite modifié la 
+					configuration du serveur afin de mener à bien l'attaque DoS.</br>
+					Cette SAE m'a permise d'enrichir mes compétences dans l'utilisation de serveurs et de services réseaux virtualisés, en
+					management de systèmes d'information ou encore en sécurité système et réseau.
+					</p>
+                    <div class="pastilles">
+                        <span class="pastille sys">Systèmes</span>
+                        <span class="pastille sec">Sécurité</span>
+                        <span class="pastille cloud">Virtualisation</span>
+						<span class="pastille net">Réseaux</span>
+						<span class="pastille proj">Gestion de projet</span>
+                    </div>
+                </div>
+                <div class="projet">
+                    <h3>SAé 4.01 : Déployer et sécuriser des services dans un réseau</h3>
+                    <p>
+					Ce projet était individuel. Il consistait à créer des services dockerisés.</br>
+					En effet, pour cette SAé nous avions pour consigne de déployer le service que nous voulions (ex. Une 
+					stack web) à condition d'utiliser des fichiers de configuration .yml (Docker compose) et au moins un Dockerfile.</br>
+					Dans mon cas j'ai choisi de déployer un service redmine, dont les données sont enregistrées dans une base de donnée PostgreSQL
+					et de créer un serveur proxy qui me permet d'accéder au service en https plutôt qu'en http.</br>
+					Cette SAé m'a beaucoup apportée, j'ai pu appronfondir mes compétences en développement de solution informatique (ici avec Docker),
+					mais également en virtualisation puisque ce projet regroupe plusieurs systèmes et services sur une seule machine, ou encore en 
+					sécurité informatique puisque l'implémentation du https dans le projet m'a permis d'apprendre à utiliser OpenSSL.</br>
+					Le projet est disponible sur mon <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>.
+					</p>
+                    <div class="pastilles">
+                        <span class="pastille sys">Systèmes</span>
+						<span class="pastille sec">Sécurité</span>
+                        <span class="pastille dev">Développement</span>
+						<span class="pastille cloud">Conteneurisation</span>
+                    </div>
+                </div>
+				<div class="projet">
+                    <h3>SAé 4.02 : Déployer et sécuriser des services dans un réseau</h3>
+                    <p>
+					Ce projet a été réalisé en groupe. Il consistait à mettre en place un cluster Docker Swarm d'au moins deux ou trois machines
+					et d'y mettre en place une stack Portainer et Traefik pour ensuite déployer un service (celui de notre choix) via Portainer.</br>
+					J'ai donc mis en place trois machines virtuelles à l'aide de VirtualBox, j'ai ensuite mis en place le cluster Docker Swarm ainsi
+					que la stack Traefik et Portainer. Puis j'ai mis en place un service WordPress via Portainer.</br>
+					Comme la SAé 4.01, ce projet m'a permis de développer mes compétences en en développement de solution informatique, et en 
+					virtualisation, mais il m'a surtout permis à apprendre à utiliser de nouveaux outils comme Docker Swarm, Traefik et Portainer.
+					Le projet est disponible sur mon <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>.
+					</p>
+                    <div class="pastilles">
+                        <span class="pastille sys">Systèmes</span>
+						<span class="pastille sec">Sécurité</span>
+                        <span class="pastille dev">Développement</span>
+						<span class="pastille cloud">Conteneurisation</span>
+						<span class="pastille proj">Gestion de projet</span>
+                    </div>
+                </div>
+                <!-- Projets d'entreprise -->
+				<div class="projet">
+                    <h3>Projet d'entreprise : Créer un LAB permettant de démontrer l'utilité d'un produit</h3>
+                    <p>
+					Ce projet a été réalisé avec un collaborateur de l'entreprise. Il consitait à créer une infrastructure réseau la plus compacte
+					possible pour que le rendu soit transportable, et qu'il permette de démontrer l'efficacité d'un produit.</br>
+					Pour ce faire il fallait démontrer que depuis une machine A qui lance une attaque sur une machine virtuelle B, le virus ne se propage 
+					pas à une machine virutelle C qui se trouvait dans un premier temps derrière un Switch, puis dans un second temps derrière notre produit.</br>
+					Pour mener à bien ce projet j'ai donc été amené à configurer des Vlans sur un Switch, à configurer la machine d'attaque ainsi que
+					les machines virtuelles cibles, à configurer notre produit et à installer tout ces éléments dans une mini baie de brassage.</br>
+					Ce projet m'a donc permis d'apprendre à concevoir des applications communicantes, à utiliser des serveurs et des services de réseaux
+					virtualisés ou encore à rendre compte de mon activité professionnelle puisque j'ai ensuite documenté ce que j'ai réalisé.
+					</p>
+                    <div class="pastilles">
+                        <span class="pastille sys">Systèmes</span>
+						<span class="pastille sec">Sécurité</span>
+						<span class="pastille net">Réseaux</span>
+						<span class="pastille proj">Documentation</span>
+						<span class="pastille cloud">Virtualisation</span>
+						<span class="pastille proj">Gestion de projet</span>
+
+                    </div>
+                </div>
+				<div class="projet">
+                    <h3>Projet d'entreprise : Migrer un service dockerisé</h3>
+                    <p>
+					Ce projet a été réalisé seul. J'avais pour mission de migrer notre gestionnaire de projets d'une machine physique vers une machine
+					virtuelle.</br>
+					Ce service était un service dockerisé, j'ai donc exporté les volumes des conteneurs pour ensuite redéployer le service sur une machine
+					virtuelle. Après avoir migré le service j'ai synchronisé la machine avec un serveur proxy hébergé localement dans l'entreprise pour sécuriser les connexions.
+					J'ai d'abord créé la procédure pour effectuer la migration en manipulant sur ma machine locale avant de réellement manipuler.</br>
+					J'ai donc pu appronfondir mes compétences en virtualisation mais également en manipulation de données ou encore en sécurité. Ayant été contraint de 
+					rendre le service indisponible lors de la manipulation, j'ai prévenu les différents collaborateur de l'entreprise me permettant d'apprendre à
+					communiquer dans le cadre d'une maintenance de ce type.
+					</p>
+                    <div class="pastilles">
+                        <span class="pastille sys">Systèmes</span>
+						<span class="pastille sec">Sécurité</span>
+						<span class="pastille net">Réseaux</span>
+						<span class="pastille proj">Documentation</span>
+						<span class="pastille cloud">Virtualisation</span>
+						<span class="pastille proj">Communication</span>
+						<span class="pastille bd">Base de données</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Gabin CROZET - Etudiant à l'IUT Lyon 1 en parcours DACS</p>
+        <div class="socials">
+            <a href="https://www.linkedin.com/in/gabin-crozet-b2a73a295/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
