@@ -3,544 +3,813 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gabin CROZET - Portfolio</title>
+<title>Gabin CROZET — Administrateur système &amp; réseau</title>
+<meta name="description" content="Portfolio de Gabin CROZET, étudiant en BUT Informatique parcours DACS à l'IUT Lyon 1, alternant administrateur système et réseau chez Seclab." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --color-bg: #f6f8fa;
-    --color-primary: #1a73e8;
-    --color-secondary: #34a853;
-    --color-accent: #fbbc05;
-    --color-danger: #ea4335;
-    --color-cloud: #6c63ff;
-    --color-proj: #00bfae;
-    --color-text: #222;
-    --color-footer: #222;
-    --color-footer-text: #fff;
-	--color-bd: #994C00;
+/* ============================================================
+   Jetons de design — clair et coloré, un ton par domaine
+   ============================================================ */
+:root{
+  --bg:#FBFCFE;
+  --surface:#FFFFFF;
+  --line:#E4E8F0;
+  --line-strong:#CDD5E2;
+
+  --ink:#131B2A;
+  --body:#3F4B5E;
+  --muted:#75819A;
+
+  --accent:#3B4FD8;
+  --accent-soft:#EDEFFD;
+
+  --radius:14px;
+  --maxw:1080px;
+
+  --font:'IBM Plex Sans','Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
 }
 
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--color-bg);
-    color: var(--color-text);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+
+body{
+  margin:0;
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(760px 420px at 8% -6%, rgba(59,79,216,.10), transparent 62%),
+    radial-gradient(680px 400px at 96% 2%, rgba(13,148,136,.10), transparent 60%),
+    radial-gradient(620px 380px at 60% 22%, rgba(219,39,119,.06), transparent 62%);
+  background-repeat:no-repeat;
+  color:var(--body);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.68;
+  -webkit-font-smoothing:antialiased;
 }
 
-header {
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    position: relative;
-    top: 0;
-    z-index: 100;
+a{color:inherit}
+
+/* ============================================================
+   Utilitaires
+   ============================================================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+.eyebrow{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 .7rem;
 }
 
-main .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem 1rem;
+.section-title{
+  font-size:clamp(1.65rem,3.4vw,2.2rem);
+  font-weight:600;letter-spacing:-.025em;color:var(--ink);
+  margin:0 0 .6rem;
 }
 
-section {
-    margin-bottom: 1rem;
+.section-lead{color:var(--muted);max-width:62ch;margin:0 0 2.6rem}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* ============================================================
+   Navigation
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(251,252,254,.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 1rem;
+.topbar-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px;
+  height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;
 }
 
-h2 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    letter-spacing: 1px;
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--ink)}
+.brand-name{font-weight:600;letter-spacing:-.01em}
+.brand-role{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.05em}
+@media (max-width:520px){.brand-role{display:none}}
+
+.nav-links{display:flex;align-items:center;gap:2px;list-style:none;margin:0;padding:0}
+.nav-links a{
+  display:block;padding:.45rem .8rem;border-radius:8px;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.03em;
+  color:var(--muted);text-decoration:none;
+  transition:color .2s,background .2s;
+}
+.nav-links a:hover,.nav-links a.is-active{color:var(--accent);background:var(--accent-soft)}
+
+.nav-toggle{
+  display:none;background:var(--surface);border:1.5px solid var(--line-strong);border-radius:8px;
+  color:var(--ink);padding:.38rem .7rem;font-family:var(--mono);font-size:.78rem;cursor:pointer;
 }
 
-.logoIUT{
-	border-radius: 4px;
-    padding: 5px;
-    width: 250px;
-    height: auto;
-    display: block;
-	margin-left: -10px;
+@media (max-width:760px){
+  .nav-toggle{display:block}
+  .nav-links{
+    position:absolute;top:64px;left:0;right:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:var(--surface);border-bottom:1px solid var(--line);
+    padding:8px 20px 14px;display:none;
+  }
+  .nav-links.is-open{display:flex}
+  .nav-links a{padding:.65rem .5rem}
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 1rem 2rem;
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero{padding:clamp(56px,9vw,104px) 0 clamp(44px,6vw,72px)}
+
+.hero h1{
+  font-size:clamp(2.1rem,5.2vw,3.2rem);
+  font-weight:600;line-height:1.14;letter-spacing:-.035em;
+  color:var(--ink);max-width:20ch;margin:.3rem 0 1.1rem;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(180deg,transparent 62%,rgba(13,148,136,.28) 62%);
+  padding:0 .06em;
 }
 
-nav .menu {
-    display: flex;
-    gap: 1.2rem; /* réduit l'espace entre les boutons */
-    margin-left: auto; /* pousse le menu à droite */
+.hero-sub{font-size:1.06rem;color:var(--body);max-width:56ch;margin:0 0 2rem}
+
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px}
+
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:.62rem 1.05rem;border-radius:9px;
+  font-family:var(--mono);font-size:.8rem;letter-spacing:.03em;
+  text-decoration:none;border:1.5px solid var(--line-strong);background:var(--surface);
+  color:var(--ink);
+  transition:border-color .2s,background .2s,color .2s,transform .2s;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:500}
+.btn-primary:hover{background:#2E3FBE;border-color:#2E3FBE;color:#fff}
+
+/* ============================================================
+   Sections
+   ============================================================ */
+.section{padding:clamp(52px,7vw,84px) 0;border-top:1px solid var(--line)}
+
+/* Profil */
+.about{max-width:70ch}
+.about p{margin:0 0 1.15rem}
+.about p:last-child{margin-bottom:0}
+.about strong{color:var(--ink);font-weight:600}
+
+/* ============================================================
+   Cadres colorés — motif partagé
+   ============================================================ */
+.card{
+  position:relative;
+  border:1.5px solid var(--c-line,var(--line));
+  border-top:4px solid var(--c,var(--accent));
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--c-soft,#fff) 0%,#fff 46%);
+  transition:border-color .25s,box-shadow .25s,transform .25s;
+}
+.card:hover{
+  border-color:var(--c,var(--accent));
+  box-shadow:0 10px 26px -14px var(--c,rgba(0,0,0,.2));
+  transform:translateY(-3px);
 }
 
-nav .menu li {
-    list-style: none;
+.chip{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;
+  color:var(--c,var(--accent));background:var(--c-soft,var(--accent-soft));
+  border:1px solid var(--c-line,var(--line));
+  border-radius:6px;padding:.14rem .45rem;
 }
 
-nav .menu a {
-    text-decoration: none;
-    color: var(--color-text);
-    font-weight: 500;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  font-family:var(--mono);font-size:.69rem;
+  color:var(--body);background:#fff;
+  border:1px solid var(--c-line,var(--line));border-radius:6px;padding:.16rem .5rem;
 }
 
-nav .menu a:hover {
-    background: var(--color-bg);
-    color: var(--color-primary);
+/* ============================================================
+   Compétences
+   ============================================================ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:18px}
+
+.skill-card{padding:22px 22px 20px}
+.skill-head{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.skill-card h3{font-size:1rem;font-weight:600;color:var(--ink);margin:0;letter-spacing:-.015em}
+
+.skill-list{list-style:none;margin:0 0 16px;padding:0}
+.skill-list li{position:relative;padding-left:16px;font-size:.9rem;margin-bottom:.45rem}
+.skill-list li::before{
+  content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;
+  background:var(--c,var(--accent));opacity:.5;
 }
 
-/* Présentation */
+/* ============================================================
+   Projets
+   ============================================================ */
+.projects{display:grid;gap:16px}
 
-.mapresentation{
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #222;
-  max-width: 700px;
-  margin: 2em auto 1em auto;
-  text-align: justify;
-  background: #f9f9f9;
-  padding: 1.2em 2em;
-  border-radius: 10px;
-  box-shadow:  0 2px 8px rgba(0,0,0,0.07);
-  transition: box-shadow 0.3s;
+.project{padding:26px 28px}
+
+.project-meta{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.55rem;
 }
 
-.mapresentation:hover{
-  transform: scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+.project h3{font-size:1.14rem;font-weight:600;color:var(--ink);letter-spacing:-.02em;line-height:1.35;margin:0 0 .65rem}
+.project p{font-size:.94rem;margin:0 0 1.1rem;max-width:72ch}
+
+.project-more{
+  border:1.5px solid var(--c-line,var(--line));background:#fff;
+  border-radius:8px;padding:.35rem .8rem;margin:0 0 1.1rem;
+  font-family:var(--mono);font-size:.73rem;color:var(--c,var(--accent));
+  cursor:pointer;letter-spacing:.03em;
+  transition:background .2s,border-color .2s;
 }
+.project-more:hover{background:var(--c-soft,var(--accent-soft));border-color:var(--c,var(--accent))}
 
-/* Compétences */
-
-.competence-box {
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    margin-bottom: 0;
-    overflow: hidden;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+.project-detail{
+  display:none;font-size:.9rem;color:var(--body);
+  background:var(--c-soft,#F5F7FB);
+  border:1px solid var(--c-line,var(--line));
+  border-radius:10px;padding:16px 20px 16px 22px;margin:0 0 1.2rem;
 }
+.project-detail.is-open{display:block}
+.project-detail ul{margin:0;padding-left:18px}
+.project-detail li{margin-bottom:.35rem}
+.project-detail li:last-child{margin-bottom:0}
+.project-detail li::marker{color:var(--c,var(--accent))}
+.project-detail code{font-family:var(--mono);font-size:.86em;background:#fff;border:1px solid var(--c-line,var(--line));border-radius:4px;padding:0 .25em}
 
-.competence-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+/* ============================================================
+   Pied de page
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:26px 0;background:var(--surface)}
+.foot-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
+  font-family:var(--mono);font-size:.73rem;color:var(--muted);
 }
+.foot-inner a{color:var(--muted);text-decoration:none}
+.foot-inner a:hover{color:var(--accent)}
 
-.competence-header {
-    padding: 1rem 1rem;
-    color: white;
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
-.competence-header.sys { background-color: var(--color-primary); }
-.competence-header.net { background-color: var(--color-secondary); }
-.competence-header.sec { background-color: var(--color-danger); }
-.competence-header.cloud { background-color: var(--color-cloud); }
-.competence-header.dev { background-color: var(--color-accent); color: #222; }
-.competence-header.proj { background-color: var(--color-proj); }
-.competence-header.bd { background-color: var(--color-bd); }
-
-
-
-.competence-list {
-    padding: 0.7rem 1.2rem 1rem 1.2rem;
-    font-size: 0.95rem;
-    line-height: 1.3;
-    color: var(--color-text);
-    list-style-type: disc;
-    list-style-position: inside;
-}
-
-.competence-list li {
-    margin-bottom: 0.5rem;
-}
-
-.competences-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.2rem 2rem;
-    justify-content: center;
-    margin-top: 0;
-	justify-items: center;
-}
-
-/* Projets */
-.projets-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.projet {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 1rem;
-    text-align: center;
-    transition: box-shadow 0.2s, transform 0.2s;
-}
-
-.projet:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.pastilles {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    margin-top: 0.7rem;
-    flex-wrap: wrap;
-}
-
-.pastille {
-    display: inline-block;
-    padding: 0.35em 1em;
-    border-radius: 20px;
-    font-size: 0.95em;
-    color: #fff;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.2em;
-}
-.pastille.sys { background: var(--color-primary); }
-.pastille.net { background: var(--color-secondary); }
-.pastille.sec { background: var(--color-danger); }
-.pastille.cloud { background: var(--color-cloud);}
-.pastille.dev { background: var(--color-accent); color: #222;}
-.pastille.proj { background: var(--color-proj); }
-.pastille.bd { background: var(--color-bd);}
-
-
-footer {
-    background: var(--color-footer);
-    color: var(--color-footer-text);
-    padding: 1rem 0;
-    text-align: center;
-    margin-top: 2rem;
-}
-
-footer .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.7rem;
-}
-
-footer .socials a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 0.7rem;
-    font-size: 1.2rem;
-    transition: color 0.2s;
-}
-
-footer .socials a:hover {
-    color: var(--color-primary);
-}
-
-@media (max-width: 700px) {
-    nav ul { gap: 1rem; }
-    .projets-grid { gap: 1rem; }
-    main .container { padding: 1rem 0.5rem; }
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
-<header>
-    <nav>
-		<img src="logoIUT.jpg" alt="Logo de l'IUT Lyon 1" class="logoIUT">
-		<ul class="menu">
-			<li><a href="#presentation">Présentation</a></li>
-			<li><a href="#competences">Compétences</a></li>
-			<li><a href="#projets">Projets</a></li>
-		</ul>
-    </nav>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-name">Gabin CROZET</span>
+      <span class="brand-role">admin. système &amp; réseau</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#projets">Projets</a></li>
+    </ul>
+  </div>
 </header>
 
-<main>
-    <!-- Présentation -->
-    <section id="presentation">
-		<h1>Qui suis-je ?</h1>
-			<div class="mapresentation">
-				<p>
-					&emsp;Je m'appelle Gabin et je suis actuellement étudiant en deuxième année à l’IUT Informatique,
-					où je poursuis le parcours DACS (Déploiement d’Applications Communicantes et Sécurisées).<br><br>
-					&emsp;Passionné par les réseaux informatique et par leur gestion, leur administration ou encore leur sécurisation,
-					j’ai choisi cette spécialisation afin d’acquérir des compétences solides dans la création et le déploiement de services 
-					applicatifs sécurisés, en virtualisation, ou encore en réseau.<br><br>
-					&emsp;En plus des compétences acquises en cours, le cursus que je suis me permet d'acquérir des compétences en entreprise.
-					Ces compétences sont pour la plus part des compétences que je n'aurais pas pu acquérir si je suivais un cursus classique 
-					me permettant ainsi d'enrichir mes compétences à travers des éléments plus concret.<br><br>
-					&emsp;De plus j’ai eu l’opportunité de travailler sur divers projets que ce soit en cours comme en entreprise. 
-					Ces projet consistaien à mettre en place des architectures sécurisées, migrer des services au sein même de mon entreprise,
-					ou administrer ces services et leurs utilisateurs.<br><br>
-					&emsp;Curieux, rigoureux et toujours à la recherche de nouveaux défis, je souhaite mettre à profit mes connaissances techniques 
-					à travers l'exercice de métiers comme administrateur système et réseau ou encore RSSI.<br><br>
-					&emsp;C'est pourquoi, ce portfolio a pour objectif de mettre en valeur mes compétences, mes réalisations et mon parcours afin de 
-					réaliser mon objectif.
-				</p>
-			</div>
-    </section>
+<main id="top">
 
-    <!-- Compétences -->
-    <section id="competences">
-    <div class="container">
-        <h2>Mes Compétences</h2>
-        <div class="competences-grid">
-            <div class="competence-box">
-                <div class="competence-header sys">Systèmes</div>
-                <ul class="competence-list">
-                    <li>Créer, faire évoluer et maintenir un système informatique communicant opérationnel</li>
-					<li>Maîtriser l'architecture d'un système (Debian, Ubuntu, Windows, macOS)</li>
-					<li>Configurer des services de communication (Apache, Nginx, Traefik)</li>
-                    <li>Gérer un Active Directory</li>
-                    <li>Gestion des sauvegardes</li>
-                </ul>
-            </div>
-
-            <div class="competence-box">
-                <div class="competence-header net">Réseaux</div>
-                <ul class="competence-list">
-					<li>Créer, faire évoluer et maintenir un système informatique communicant opérationnel</li>
-					<li>Maîtriser l'architecture de réseaux</li>
-                    <li>Configurer des systèmes communicants (TCP/IP, VLAN, DHCP, DNS, OSPF/HSRP, PVST, VTP, NAT-PAT)</li>
-                    <li>Configuration de routeurs et commutateurs Cisco</li>
-                    <li>VPN (GlobalProtect, PaloAlto)</li>
-                </ul>
-            </div>
-
-            <div class="competence-box">
-                <div class="competence-header sec">Sécurité</div>
-                <ul class="competence-list">
-                    <li>Sécuriser un système d'information</li>
-                    <li>Administration de firewall et création de règle de filtrage (PaloAlto)</li>
-                    <li>Création de directives permettant de définir une politique de sécurité</li>
-                </ul>
-            </div>
-
-            <div class="competence-box">
-                <div class="competence-header cloud">Virtualisation & Conteneurisation</div>
-                <ul class="competence-list">
-                    <li>Utilisation d'outils de virtualisation de type 1 (Proxmox)</li>
-                    <li>Utilisation d'outils de virtualisation de type 2 (VMware, VirtualBox)</li>
-                    <li>Utilisation d'outils de conteneurisation (Docker, Docker Swarm, Portainer)</li>
-                </ul>
-            </div>
-
-			<div class="competence-box">
-                <div class="competence-header bd">Gestion de base de données</div>
-                <ul class="competence-list">
-                    <li>Concevoir, gérer, administrer et exploiter les données de l’information</li>
-                    <li>Concevoir et mettre en place une base de données (SQL, PL/SQL, MongoDB)</li>
-					<li>Organiser la restitution de données à travers la programmation et la visualisation</li>
-                </ul>
-            </div>
-
-            <div class="competence-box">
-                <div class="competence-header dev">Scripts & Développement bas niveau</div>
-                <ul class="competence-list">
-					<li>Développer, coder, tester et intégrer une solution informatique (Bash, Python, C)</li>
-                    <li>Veiller à la qualité du code et à sa documentation</li>
-					<li>Choisir les ressources techniques appropriées</li>
-					<li>S’appuyer sur des schémas de raisonnement</li>
-                    <li>Gestion et déploiement de configurations (Ansible, Docker, Docker Swarm, Portainer)</li>
-                </ul>
-            </div>
-
-            <div class="competence-box">
-                <div class="competence-header proj">Gestion de projet & Soft Skills</div>
-                <ul class="competence-list">
-                    <li>Documentation technique et reporting (Procédures, Documentation)</li>
-                    <li>Organiser et piloter un projet informatique avec des méthodes classiques (Kanban, Gantt, PERT, Modèle en V/W, AGILE)</li>
-                    <li>Appliquer une démarche de suivi de projet en fonction des besoins métiers des clients et des utilisateurs (Comptes-rendus d'activité, Tableau d'avancement)</li>
-					<li>Formaliser les besoins du client et de l’utilisateur (Mise en place d'un cahier des charges)</li>
-                    <li>Communiquer et travailler en équipe</li>
-					<li>Anglais (Niveau B2)</li>
-                </ul>
-            </div>
-        </div>
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">BUT 3 Informatique — parcours DACS — IUT Lyon 1</p>
+      <h1>Je construis et je <em>sécurise</em> des infrastructures.</h1>
+      <p class="hero-sub">
+        20 ans, alternant administrateur système et réseau chez Seclab, éditeur de solutions de
+        cybersécurité industrielle. Deux ans à faire tourner un système d'information réel :
+        réseaux cloisonnés, virtualisation, automatisation, sauvegardes et supervision.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projets">Voir les projets</a>
+        <a class="btn" href="https://www.linkedin.com/in/gabin-crozet-b2a73a295/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/gcrozet-amd" target="_blank" rel="noopener">GitHub</a>
+      </div>
     </div>
-</section>
+  </section>
 
-    <!-- Projets -->
-    <section id="projets">
-        <div class="container">
-            <h2>Projets Réalisés</h2>
-            <div class="projets-grid">
-                <div class="projet">
-                    <h3>SAé 3.01 : Création et déploiement de services applicatifs</h3>
-                    <p>
-					Le projet a été réalisé en groupe. Nous avons utilisé d'une machine virtuelle Ubuntu pour mettre en place un serveur
-					web Apache, pour ensuite effectuer une attaque de type DoS (Deny of Service). L'objectif de ce projet était de comprendre 
-					comment fonctionne Apache et quel sont les moyens de sécurité que ce service utilise. Nous avons ensuite modifié la 
-					configuration du serveur afin de mener à bien l'attaque DoS.</br>
-					Cette SAE m'a permise d'enrichir mes compétences dans l'utilisation de serveurs et de services réseaux virtualisés, en
-					management de systèmes d'information ou encore en sécurité système et réseau.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-                        <span class="pastille sec">Sécurité</span>
-                        <span class="pastille cloud">Virtualisation</span>
-						<span class="pastille net">Réseaux</span>
-						<span class="pastille proj">Gestion de projet</span>
-                    </div>
-                </div>
-                <div class="projet">
-                    <h3>SAé 4.01 : Déployer et sécuriser des services dans un réseau</h3>
-                    <p>
-					Ce projet était individuel. Il consistait à créer des services dockerisés.</br>
-					En effet, pour cette SAé nous avions pour consigne de déployer le service que nous voulions (ex. Une 
-					stack web) à condition d'utiliser des fichiers de configuration .yml (Docker compose) et au moins un Dockerfile.</br>
-					Dans mon cas j'ai choisi de déployer un service redmine, dont les données sont enregistrées dans une base de donnée PostgreSQL
-					et de créer un serveur proxy qui me permet d'accéder au service en https plutôt qu'en http.</br>
-					Cette SAé m'a beaucoup apportée, j'ai pu appronfondir mes compétences en développement de solution informatique (ici avec Docker),
-					mais également en virtualisation puisque ce projet regroupe plusieurs systèmes et services sur une seule machine, ou encore en 
-					sécurité informatique puisque l'implémentation du https dans le projet m'a permis d'apprendre à utiliser OpenSSL.</br>
-					Le projet est disponible sur mon <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-						<span class="pastille sec">Sécurité</span>
-                        <span class="pastille dev">Développement</span>
-						<span class="pastille cloud">Conteneurisation</span>
-                    </div>
-                </div>
-				<div class="projet">
-                    <h3>SAé 4.02 : Déployer et sécuriser des services dans un réseau</h3>
-                    <p>
-					Ce projet a été réalisé en groupe. Il consistait à mettre en place un cluster Docker Swarm d'au moins deux ou trois machines
-					et d'y mettre en place une stack Portainer et Traefik pour ensuite déployer un service (celui de notre choix) via Portainer.</br>
-					J'ai donc mis en place trois machines virtuelles à l'aide de VirtualBox, j'ai ensuite mis en place le cluster Docker Swarm ainsi
-					que la stack Traefik et Portainer. Puis j'ai mis en place un service WordPress via Portainer.</br>
-					Comme la SAé 4.01, ce projet m'a permis de développer mes compétences en en développement de solution informatique, et en 
-					virtualisation, mais il m'a surtout permis à apprendre à utiliser de nouveaux outils comme Docker Swarm, Traefik et Portainer.
-					Le projet est disponible sur mon <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-						<span class="pastille sec">Sécurité</span>
-                        <span class="pastille dev">Développement</span>
-						<span class="pastille cloud">Conteneurisation</span>
-						<span class="pastille proj">Gestion de projet</span>
-                    </div>
-                </div>
-                <!-- Projets d'entreprise -->
-			<div class="projet">
-                    <h3>Projet d'entreprise : Créer un LAB permettant de démontrer l'utilité d'un produit</h3>
-                    <p>
-					Ce projet a été réalisé avec un collaborateur de l'entreprise. Il consitait à créer une infrastructure réseau la plus compacte
-					possible pour que le rendu soit transportable, et qu'il permette de démontrer l'efficacité d'un produit.</br>
-					Pour ce faire il fallait démontrer que depuis une machine A qui lance une attaque sur une machine virtuelle B, le virus ne se propage 
-					pas à une machine virutelle C qui se trouvait dans un premier temps derrière un Switch, puis dans un second temps derrière notre produit.</br>
-					Pour mener à bien ce projet j'ai donc été amené à configurer des Vlans sur un Switch, à configurer la machine d'attaque ainsi que
-					les machines virtuelles cibles, à configurer notre produit et à installer tout ces éléments dans une mini baie de brassage.</br>
-					Ce projet m'a donc permis d'apprendre à concevoir des applications communicantes, à utiliser des serveurs et des services de réseaux
-					virtualisés ou encore à rendre compte de mon activité professionnelle puisque j'ai ensuite documenté ce que j'ai réalisé.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-						<span class="pastille sec">Sécurité</span>
-						<span class="pastille net">Réseaux</span>
-						<span class="pastille proj">Documentation</span>
-						<span class="pastille cloud">Virtualisation</span>
-						<span class="pastille proj">Gestion de projet</span>
+  <!-- ============================ PROFIL ============================ -->
+  <section class="section" id="profil">
+    <div class="wrap">
+      <p class="eyebrow reveal">Qui je suis</p>
+      <h2 class="section-title reveal">Profil</h2>
+      <p class="section-lead reveal">
+        Trois ans de BUT, deux ans en entreprise, et une conviction : une infrastructure ne vaut que
+        si elle est documentée, testée et reproductible.
+      </p>
 
-                    </div>
-                </div>
-				<div class="projet">
-                    <h3>Projet d'entreprise : Migrer un service dockerisé</h3>
-                    <p>
-					Ce projet a été réalisé seul. J'avais pour mission de migrer notre gestionnaire de projets d'une machine physique vers une machine
-					virtuelle.</br>
-					Ce service était un service dockerisé, j'ai donc exporté les volumes des conteneurs pour ensuite redéployer le service sur une machine
-					virtuelle. Après avoir migré le service j'ai synchronisé la machine avec un serveur proxy hébergé localement dans l'entreprise pour sécuriser les connexions.
-					J'ai d'abord créé la procédure pour effectuer la migration en manipulant sur ma machine locale avant de réellement manipuler.</br>
-					J'ai donc pu appronfondir mes compétences en virtualisation mais également en manipulation de données ou encore en sécurité. Ayant été contraint de 
-					rendre le service indisponible lors de la manipulation, j'ai prévenu les différents collaborateur de l'entreprise me permettant d'apprendre à
-					communiquer dans le cadre d'une maintenance de ce type.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-						<span class="pastille sec">Sécurité</span>
-						<span class="pastille net">Réseaux</span>
-						<span class="pastille proj">Documentation</span>
-						<span class="pastille cloud">Virtualisation</span>
-						<span class="pastille proj">Communication</span>
-						<span class="pastille bd">Base de données</span>
+      <div class="about reveal">
+        <p>
+          Je m'appelle <strong>Gabin CROZET</strong>, j'ai 20 ans et je termine ma troisième année de
+          <strong>BUT Informatique à l'IUT Lyon 1</strong>, sur le campus de la Doua. J'y suis le parcours
+          <strong>DACS</strong> — Déploiement d'Applications Communicantes et Sécurisées — que j'effectue
+          en alternance. Ces trois années m'ont permis de développer de nombreuses compétences, que vous
+          retrouverez dans ce portfolio avec les projets, à l'IUT comme en entreprise, qui les ont
+          construites.
+        </p>
+        <p>
+          Depuis septembre 2024, je suis <strong>administrateur système et réseau chez Seclab</strong>, une
+          entreprise de cybersécurité industrielle qui conçoit des équipements certifiés CSPN par l'ANSSI
+          pour sécuriser les échanges entre les domaines IT et OT, chez des clients comme EDF, la SNCF,
+          Naval Group ou Thales. J'y administre le système d'information de l'entreprise : postes
+          utilisateurs, serveurs, réseaux cloisonnés, sauvegardes, supervision et sécurité.
+        </p>
+        <p>
+          En arrivant, je n'avais jamais utilisé Debian et n'avais jamais administré une machine en
+          production. Mes premières missions se limitaient à de l'auto-formation et à de l'installation de
+          postes. Aujourd'hui, on me confie des <strong>projets entiers</strong> dont je choisis la solution
+          et que je mène jusqu'à la mise en production : déménagement complet du système d'information,
+          mise en cluster des hyperviseurs, déploiement d'un EDR, supervision de l'infrastructure.
+        </p>
+        <p>
+          L'alternance m'a autant appris sur la manière de travailler en entreprise que sur la technique.
+          Là où j'installais tout à la main, je cherche désormais à <strong>automatiser et rendre
+          reproductible</strong> — scripts et rôles Ansible déployés sur l'ensemble du parc — à tester chaque
+          opération dans un laboratoire avant la production, et à documenter systématiquement. J'ai aussi
+          appris à échanger avec des interlocuteurs très différents : les collaborateurs pour le support,
+          les développeurs pour cerner leur besoin, les prestataires pour suivre un chantier. Et j'ai
+          découvert que transmettre fait partie du métier, en construisant un cours interne
+          « Networking 101 » pour mes collègues.
+        </p>
+        <p>
+          Je poursuis à la rentrée 2026 en <strong>cycle ingénieur à CPE Lyon</strong>, toujours en
+          alternance chez Seclab. Mon objectif à terme : les métiers d'architecte système et réseau ou de
+          responsable de la sécurité des systèmes d'information.
+        </p>
+      </div>
+    </div>
+  </section>
 
-                    </div>	
-                </div>
-		<div class="projet">
-                    <h3>Projet d'entreprise : Créer un mirroir Debian local</h3>
-                    <p>
-					Ce projet a été réalisé avec l'aide d'un collaborateur.</br>
-					Cette mission avait pour objectif de créer un miroir Debian local afin d'être en capacité de mettre à jour différents logiciels, outils, 
-					systèmes d'exploitations, sans avoir besoin d'accéder à Internet. J'ai donc mis en place une machine physique sur laquelle est stocké le dépôt.</br>
-					J'ai donc pu appronfondir mes compétences en systèle à travers l'utilisation de l'outils "debmirror", en réseau car il a fallut rendre ce service 
-					accessible aux machines qui en ont besoin, et en manipulation de données.
-					</p>
-                    <div class="pastilles">
-                        			<span class="pastille sys">Systèmes</span>
-						<span class="pastille net">Réseaux</span>
-						<span class="pastille proj">Documentation</span>
-						<span class="pastille cloud">Virtualisation</span>
-						<span class="pastille proj">Communication</span>
-						<span class="pastille bd">Base de données</span>
+  <!-- ============================ COMPÉTENCES ============================ -->
+  <section class="section" id="competences">
+    <div class="wrap">
+      <p class="eyebrow reveal">Ce que je sais faire</p>
+      <h2 class="section-title reveal">Compétences</h2>
+      <p class="section-lead reveal">
+        Regroupées par domaine. Chaque bloc réunit les compétences acquises en formation et celles
+        construites en production chez Seclab.
+      </p>
 
-                    </div>
-                </div>
-		<div class="projet">
-                    <h3>Projet d'entreprise : Recherche et test de CVEs</h3>
-                    <p>
-					Ce projet a été réalisé avec un collaborateur</br>
-					L'objectif de cette mission était de trouver et tester des CVEs s'attaquants aux couches de flux de données du modèle OSI afin de prouver
-					l'utilité, l'efficacité et la fiabilité d'un des produits que nous vendons.</br>
-					J'ai donc pu appronfondir mes compétences sécurité en apprenant notamment ce qu'est une CVE et en les testant dans un environnement 
-					virtuel créé à cet effet mobilisant ainsi mes compétence en virtualisation et en configuration d'environnement sécurisé.
-					</p>
-                    <div class="pastilles">
-                        <span class="pastille sys">Systèmes</span>
-						<span class="pastille sec">Sécurité</span>
-						<span class="pastille net">Réseaux</span>
-						<span class="pastille proj">Documentation</span>
-						<span class="pastille cloud">Virtualisation</span>
-						<span class="pastille proj">Communication</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="skills-grid">
+
+        <article class="card skill-card reveal" style="--c:#2563EB;--c-line:#BFD3FB;--c-soft:#EFF4FE">
+          <div class="skill-head"><span class="chip">SYS</span><h3>Systèmes &amp; poste de travail</h3></div>
+          <ul class="skill-list">
+            <li>Installer, faire évoluer et maintenir un système informatique communicant</li>
+            <li>Administration Debian 12/13 au quotidien, Windows et Windows Server</li>
+            <li>Installation de postes utilisateurs, partitionnement, chiffrement des disques</li>
+            <li>Automatisation d'installation (preseed), clés bootables, vérification d'intégrité</li>
+            <li>Matériel : montage de PC, BIOS, GRUB, iDRAC, serveurs lames et 2U, Raspberry Pi</li>
+            <li>Support utilisateur et accompagnement à la prise en main</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Debian</span><span class="tag">Windows Server</span><span class="tag">systemd</span>
+            <span class="tag">GRUB</span><span class="tag">iDRAC</span><span class="tag">preseed</span><span class="tag">Raspberry Pi</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#0D9488;--c-line:#A9DFD9;--c-soft:#ECF8F6">
+          <div class="skill-head"><span class="chip">NET</span><h3>Réseaux</h3></div>
+          <ul class="skill-list">
+            <li>Concevoir et documenter une architecture réseau logique et physique</li>
+            <li>Configuration de commutateurs Cisco, Netgear, FS — VLANs, ACLs, isolation de ports</li>
+            <li>TCP/IP, DHCP, NAT/PAT, OSPF, HSRP, PVST, VTP, brassage de baie</li>
+            <li>Services d'infrastructure : DNS (Bind9), NTP, LDAP, RADIUS, SMTP</li>
+            <li>Reverse proxy Nginx et Apache2, mise en place de TLS</li>
+            <li>Analyse et cartographie de réseau : Wireshark, PCAP, outil Seckiot</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">VLAN</span><span class="tag">ACL</span><span class="tag">Bind9</span><span class="tag">NTP</span>
+            <span class="tag">LDAP</span><span class="tag">RADIUS</span><span class="tag">Nginx</span><span class="tag">Wireshark</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#DC2626;--c-line:#F6BFBF;--c-soft:#FEF1F1">
+          <div class="skill-head"><span class="chip">SEC</span><h3>Sécurité</h3></div>
+          <ul class="skill-list">
+            <li>Sécuriser un système d'information et appliquer une PSSI</li>
+            <li>Administration de pare-feu Palo Alto : règles de filtrage, NAT, ouverture de services</li>
+            <li>VPN GlobalProtect, gestion des accès et des habilitations</li>
+            <li>Déploiement et exploitation d'un EDR (Harfanglab), traitement des alertes</li>
+            <li>Étude et test de CVE en environnement isolé, durcissement de postes Linux</li>
+            <li>Cadre normatif : ISO 27001/27002, recommandations ANSSI, PCA/PRA</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Palo Alto</span><span class="tag">GlobalProtect</span><span class="tag">Harfanglab</span>
+            <span class="tag">GPG</span><span class="tag">OpenSSL</span><span class="tag">CVE</span><span class="tag">ISO 27001</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#7C3AED;--c-line:#D5C4FA;--c-soft:#F5F0FE">
+          <div class="skill-head"><span class="chip">VIR</span><h3>Virtualisation &amp; conteneurisation</h3></div>
+          <ul class="skill-list">
+            <li>Proxmox : création, migration, sauvegarde et mise en cluster d'hyperviseurs</li>
+            <li>VirtualBox, VMware et ESXi pour les environnements de test</li>
+            <li>Docker et Docker Compose, Docker Swarm, Portainer, Traefik</li>
+            <li>Registry d'images Docker local (Harbor) avec authentification LDAP</li>
+            <li>Construction de laboratoires de test avant toute opération en production</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Proxmox</span><span class="tag">ESXi</span><span class="tag">Docker</span>
+            <span class="tag">Swarm</span><span class="tag">Portainer</span><span class="tag">Traefik</span><span class="tag">Harbor</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#EA580C;--c-line:#F9CBAA;--c-soft:#FEF3EB">
+          <div class="skill-head"><span class="chip">AUT</span><h3>Automatisation, scripts &amp; développement</h3></div>
+          <ul class="skill-list">
+            <li>Ansible : rôles, inventaires, templates, déploiement sur l'ensemble du parc</li>
+            <li>Terraform pour l'infrastructure as code (auto-formation)</li>
+            <li>Scripts Bash et Python : mirroring de dépôts, cartographie, webhooks, sondes</li>
+            <li>Développer, coder, tester et intégrer une solution informatique (Bash, Python, C)</li>
+            <li>Tâches planifiées et services : systemd, crontab, rsync, NFS, rclone</li>
+            <li>Versionnement avec Git et Gitea, qualité et documentation du code</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Ansible</span><span class="tag">Terraform</span><span class="tag">Bash</span>
+            <span class="tag">Python</span><span class="tag">Git</span><span class="tag">rsync</span><span class="tag">crontab</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#0891B2;--c-line:#A8DAE7;--c-soft:#ECF7FA">
+          <div class="skill-head"><span class="chip">OPS</span><h3>Exploitation, sauvegarde &amp; supervision</h3></div>
+          <ul class="skill-list">
+            <li>Rédaction d'une politique de sauvegarde et étude de conformité ANSSI</li>
+            <li>Sauvegardes automatisées, volumes NFS, NAS, tests de restauration</li>
+            <li>Supervision de l'infrastructure via Prometheus, Grafana et node_exporter</li>
+            <li>Miroirs Debian locaux et transfert de paquets vers un réseau isolé</li>
+            <li>Inventaire du parc, gestion des incidents et remise en service</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">NAS</span>
+            <span class="tag">NFS</span><span class="tag">debmirror</span><span class="tag">PCA/PRA</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#B45309;--c-line:#EBCBA1;--c-soft:#FCF5E9">
+          <div class="skill-head"><span class="chip">DAT</span><h3>Données &amp; services d'entreprise</h3></div>
+          <ul class="skill-list">
+            <li>Concevoir, administrer et exploiter une base de données</li>
+            <li>SQL, PL/SQL, PostgreSQL, SQL Server, MongoDB</li>
+            <li>Migration de services et de données : Redmine, Gitea, ERP Dolibarr</li>
+            <li>Administration Microsoft 365, fusion de deux tenants après rachat</li>
+            <li>Restitution de données par la programmation et la visualisation</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">PostgreSQL</span><span class="tag">SQL Server</span><span class="tag">MongoDB</span>
+            <span class="tag">Redmine</span><span class="tag">Dolibarr</span><span class="tag">Microsoft 365</span>
+          </div>
+        </article>
+
+        <article class="card skill-card reveal" style="--c:#DB2777;--c-line:#F6C0D8;--c-soft:#FDEFF5">
+          <div class="skill-head"><span class="chip">PRO</span><h3>Méthodes &amp; compétences transversales</h3></div>
+          <ul class="skill-list">
+            <li>Piloter un projet informatique : Kanban, Gantt, PERT, cycle en V, Agile</li>
+            <li>Formaliser un besoin client et le traduire en cahier des charges</li>
+            <li>Suivi d'activité par tickets (Redmine), comptes rendus et points d'avancement</li>
+            <li>Rédaction de procédures, de documentation technique et de wikis</li>
+            <li>Transmission : présentations internes et cours « Networking 101 »</li>
+            <li>Autonomie sur des projets menés seul, suivi de prestataires, anglais technique (B2)</li>
+          </ul>
+          <div class="tags">
+            <span class="tag">Redmine</span><span class="tag">Kanban</span><span class="tag">Gantt</span>
+            <span class="tag">Documentation</span><span class="tag">Anglais B2</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PROJETS ============================ -->
+  <section class="section" id="projets">
+    <div class="wrap">
+      <p class="eyebrow reveal">Ce que j'ai construit</p>
+      <h2 class="section-title reveal">Projets</h2>
+      <p class="section-lead reveal">
+        Une sélection des projets les plus complexes menés chez Seclab et à l'IUT.
+        Chaque fiche peut être dépliée pour en voir le détail technique.
+      </p>
+
+      <div class="projects">
+
+        <article class="card project reveal" style="--c:#0D9488;--c-line:#A9DFD9;--c-soft:#ECF8F6">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2025 – 2026</span></div>
+          <h3>Déménagement complet du système d'information</h3>
+          <p>
+            Préparation et exécution du transfert du SI vers les nouveaux locaux de Pérols : mise à jour de
+            l'architecture logique, création de l'architecture physique, choix et test des équipements, puis
+            remise en service du réseau. C'est la mission qui m'a le plus appris, parce qu'elle m'a obligé à
+            comprendre le système d'information dans son ensemble.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Documents d'architecture logique et physique du réseau, utilisés le jour du déménagement</li>
+              <li>Test des switchs candidats avant achat, dont l'isolation de ports sans VLAN</li>
+              <li>Installation et configuration des switchs, points d'accès Wi-Fi et pare-feu avec le prestataire</li>
+              <li>Résolution des problèmes de VLAN et de NAT ayant suivi la bascule</li>
+              <li>Nettoyage des ports du switch, création d'un VLAN par zone et d'un Wi-Fi invité</li>
+              <li>Installation de la VM de gestion des badges et de l'alarme (Windows Server + SQL)</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">VLAN</span><span class="tag">NAT</span><span class="tag">Palo Alto</span><span class="tag">Wi-Fi</span><span class="tag">Schémas d'architecture</span><span class="tag">Suivi de prestataire</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#2563EB;--c-line:#BFD3FB;--c-soft:#EFF4FE">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2024 – 2026</span></div>
+          <h3>Miroir Debian local et transferts vers le réseau isolé</h3>
+          <p>
+            Mise en place d'un miroir Debian interne permettant de mettre à jour les machines sans accès
+            Internet, puis transfert régulier des dépôts vers le réseau noir à travers l'équipement de
+            rupture protocolaire de l'entreprise.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Installation du serveur miroir et script <code>debmirror</code> de synchronisation</li>
+              <li>Tri des paquets par distribution via un script comparant les dépendances, faute d'espace disque</li>
+              <li>Archivage, découpage et signature GPG des paquets avant transfert</li>
+              <li>Passage par le SX Network puis reconstitution de l'archive côté réseau isolé</li>
+              <li>Migration vers les dépôts Debian 13 (Trixie) en amd64 et arm64</li>
+              <li>Correction d'un reset de connexion Nginx qui interrompait les <code>pull</code> des développeurs</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">debmirror</span><span class="tag">GPG</span><span class="tag">SFTP</span><span class="tag">Nginx</span><span class="tag">Bash</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#0891B2;--c-line:#A8DAE7;--c-soft:#ECF7FA">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2026</span></div>
+          <h3>Supervision de l'infrastructure</h3>
+          <p>
+            Choix et mise en place d'une solution de supervision couvrant l'ensemble du parc serveur, avec
+            automatisation de l'intégration des machines à surveiller pour que l'ajout d'un serveur ne soit
+            plus une opération manuelle.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Déploiement de Prometheus et Grafana sur une machine virtuelle dédiée</li>
+              <li>Rôle Ansible de déploiement de <code>node_exporter</code> et enrichissement de l'inventaire</li>
+              <li>Génération des certificats manquants et mise en place du HTTPS sur l'interface</li>
+              <li>Migration de la VM de supervision vers la zone d'administration</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Ansible</span><span class="tag">TLS</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#DC2626;--c-line:#F6BFBF;--c-soft:#FEF1F1">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2026</span></div>
+          <h3>Déploiement d'un EDR sur le parc</h3>
+          <p>
+            Mise en production de la solution EDR Harfanglab : ouverture des accès, phase de test sur un
+            périmètre restreint, création des règles de détection, puis déploiement et durcissement sur
+            l'ensemble des postes utilisateurs.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Création de la règle Palo Alto débloquant l'accès à la console (port 8443)</li>
+              <li>Installation des agents sur le périmètre de test et prise en main de l'outil</li>
+              <li>Création des règles antivirus et traitement des alertes remontées</li>
+              <li>Rôle Ansible automatisant l'installation de l'agent sur le reste du parc</li>
+              <li>Durcissement progressif des postes utilisateurs</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Harfanglab</span><span class="tag">EDR</span><span class="tag">Palo Alto</span><span class="tag">Ansible</span><span class="tag">Durcissement</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#EA580C;--c-line:#F9CBAA;--c-soft:#FEF3EB">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2025 – 2026</span></div>
+          <h3>Automatisation du parc avec Ansible</h3>
+          <p>
+            Reprise du dépôt Ansible existant puis écriture de nouveaux rôles pour rendre les
+            configurations reproductibles sur l'ensemble des machines, plutôt que réinstallées à la main
+            serveur par serveur.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Évaluation des anciens scripts Ansible de l'entreprise pour trier ce qui restait utile</li>
+              <li>Rôle de déploiement de la configuration NTP sur le réseau isolé</li>
+              <li>Rôle <code>ssh_keys</code> distribuant les clés des utilisateurs autorisés par machine</li>
+              <li>Rôles d'installation de Docker, de l'environnement de build et des agents de supervision</li>
+              <li>Laboratoires de test dédiés avant chaque application en production</li>
+              <li>Nettoyage des inventaires et du dépôt Ansible côté réseau gris</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Ansible</span><span class="tag">Rôles</span><span class="tag">Inventaires</span><span class="tag">Templates</span><span class="tag">Gitea</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#7C3AED;--c-line:#D5C4FA;--c-soft:#F5F0FE">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2026</span></div>
+          <h3>Mise en cluster des hyperviseurs Proxmox</h3>
+          <p>
+            Rapprochement des deux hyperviseurs de l'entreprise au sein d'un cluster unique, après montée
+            de version de l'hyperviseur principal, pour pouvoir migrer les machines virtuelles d'un nœud à
+            l'autre et administrer l'ensemble depuis une seule interface.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Étude de la documentation et définition du périmètre du cluster</li>
+              <li>Montée de version de Proxmox 7 vers 8 pour aligner les deux hyperviseurs</li>
+              <li>Mise en cluster puis restauration des machines virtuelles de l'hyperviseur migré</li>
+              <li>Ajout d'un disque à l'hyperviseur principal et création des volumes associés</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Proxmox</span><span class="tag">Cluster</span><span class="tag">Migration de VM</span><span class="tag">Stockage</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#B45309;--c-line:#EBCBA1;--c-soft:#FCF5E9">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2025 – 2026</span></div>
+          <h3>Politique et automatisation des sauvegardes</h3>
+          <p>
+            La sauvegarde était très peu présente dans le système d'information. J'ai cartographié les
+            données critiques, rédigé la politique de sauvegarde de l'entreprise et mis en place les
+            sauvegardes automatiques sur les deux réseaux.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Cartographie du réseau isolé pour identifier les éléments à sauvegarder</li>
+              <li>Rédaction du document de politique de sauvegarde et étude de conformité ANSSI</li>
+              <li>Sauvegardes automatiques des VM Proxmox, montages NFS sur le NAS, crontab et rsync</li>
+              <li>Serveur Proxmox dédié aux tests de restauration, dont celui du dépôt Gitea</li>
+              <li>Préparation de disques de sauvegarde partitionnés et chiffrés</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">rsync</span><span class="tag">crontab</span><span class="tag">NFS</span><span class="tag">NAS</span><span class="tag">ANSSI</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#0D9488;--c-line:#A9DFD9;--c-soft:#ECF8F6">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2025</span></div>
+          <h3>Serveurs d'infrastructure du réseau isolé</h3>
+          <p>
+            Construction des services de base du réseau noir, jusque-là inexistants : résolution de noms,
+            synchronisation du temps et authentification centralisée, pour permettre aux développeurs de
+            travailler sur les nouvelles fonctions du produit.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Serveur DNS Bind9 et transfert préalable des paquets nécessaires vers le réseau isolé</li>
+              <li>Serveur NTP sur Raspberry Pi 4 avec antenne satellite, puis correction en SNTP</li>
+              <li>Serveurs LDAP et RADIUS pour le développement et le test des fonctions du produit SXN</li>
+              <li>Tests de bout en bout, dont la configuration PAM côté client</li>
+              <li>Déploiement de la configuration NTP sur l'ensemble du réseau via un rôle Ansible</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Bind9</span><span class="tag">NTP</span><span class="tag">LDAP</span><span class="tag">RADIUS</span><span class="tag">Raspberry Pi</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#7C3AED;--c-line:#D5C4FA;--c-soft:#F5F0FE">
+          <div class="project-meta"><span class="chip">Seclab</span><span>2025</span></div>
+          <h3>Laboratoire de démonstration client</h3>
+          <p>
+            Conception d'un laboratoire transportable, monté en mini baie de brassage, démontrant qu'une
+            attaque exploitant les couches basses du modèle OSI traverse un switch classique mais est
+            arrêtée par notre équipement.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Deux hyperviseurs Proxmox sur mini-PC, une station d'administration Debian, un switch Netgear</li>
+              <li>Découpage en quatre VLANs séparant les machines hôtes des machines virtuelles</li>
+              <li>ACLs isolant les VLANs d'administration des VLANs de production</li>
+              <li>Scénario en deux temps : attaque via le switch, puis via le SX Network</li>
+              <li>Adaptation à un équipement inhabituel pour moi (Netgear plutôt que Cisco)</li>
+              <li>Rédaction des procédures d'installation de chaque équipement du lab</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">VLAN</span><span class="tag">ACL</span><span class="tag">Netgear</span><span class="tag">Proxmox</span><span class="tag">Baie de brassage</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#DB2777;--c-line:#F6C0D8;--c-soft:#FDEFF5">
+          <div class="project-meta"><span class="chip">IUT — SAé</span><span>BUT 3</span></div>
+          <h3>Élaboration d'un PCA / PRA d'entreprise</h3>
+          <p>
+            Projet en binôme : analyser les moyens du système d'information d'une entreprise, identifier les
+            composants les plus exposés lors d'un incident majeur, puis construire le plan de continuité et
+            de reprise d'activité correspondant, jusqu'aux actions concrètes à engager.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Analyse des risques : panne, cyberattaque, incendie, coupure réseau, indisponibilité du personnel clé</li>
+              <li>Bilan d'impact sur l'activité (BIA) avec définition des RTO et RPO par processus</li>
+              <li>Organisation de crise : cellule, rôles et critères de déclenchement du plan</li>
+              <li>Volet PCA : télétravail, site de secours, procédures manuelles, activités prioritaires</li>
+              <li>Volet PRA : infrastructure de secours, ordre de restauration, validation fonctionnelle</li>
+              <li>Communication de crise, plan de tests et maintien en condition opérationnelle</li>
+              <li>Soutenance orale évaluée sur la présentation, le volet organisationnel et le volet technique</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">PCA/PRA</span><span class="tag">BIA</span><span class="tag">RTO/RPO</span><span class="tag">Analyse de risques</span><span class="tag">Soutenance</span></div>
+        </article>
+
+        <article class="card project reveal" style="--c:#2563EB;--c-line:#BFD3FB;--c-soft:#EFF4FE">
+          <div class="project-meta"><span class="chip">IUT — SAé</span><span>BUT 3</span></div>
+          <h3>Infrastructure clusterisée sous Proxmox</h3>
+          <p>
+            Mise en place d'une infrastructure virtualisée en cluster : plusieurs hyperviseurs Proxmox
+            réunis pour héberger des services, avec migration de machines virtuelles entre les nœuds et
+            continuité en cas de perte de l'un d'eux.
+          </p>
+          <button class="project-more" type="button">Détails +</button>
+          <div class="project-detail">
+            <ul>
+              <li>Installation des nœuds Proxmox et constitution du cluster</li>
+              <li>Configuration du réseau et du stockage partagé entre les nœuds</li>
+              <li>Déploiement de services virtualisés et migration de VM entre hyperviseurs</li>
+              <li>Tests de bascule et vérification de la continuité des services</li>
+            </ul>
+          </div>
+          <div class="tags"><span class="tag">Proxmox</span><span class="tag">Cluster</span><span class="tag">Haute disponibilité</span><span class="tag">Stockage partagé</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-    <div class="container">
-        <p>&copy; 2025 Gabin CROZET - Etudiant à l'IUT Lyon 1 en parcours DACS</p>
-        <div class="socials">
-            <a href="https://www.linkedin.com/in/gabin-crozet-b2a73a295/" target="_blank">LinkedIn</a>
-            <a href="https://github.com/gcrozet-amd" target="_blank">GitHub</a>
-        </div>
-    </div>
+  <div class="foot-inner">
+    <span>© 2026 Gabin CROZET — BUT Informatique, parcours DACS · IUT Lyon 1</span>
+    <span>
+      <a href="https://www.linkedin.com/in/gabin-crozet-b2a73a295/" target="_blank" rel="noopener">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/gcrozet-amd" target="_blank" rel="noopener">GitHub</a>
+    </span>
+  </div>
 </footer>
+
+<script>
+/* Menu mobile */
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('is-open');
+  navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* Détails des projets */
+document.querySelectorAll('.project-more').forEach(btn => {
+  const detail = btn.nextElementSibling;
+  btn.addEventListener('click', () => {
+    const open = detail.classList.toggle('is-open');
+    btn.textContent = open ? 'Masquer les détails −' : 'Détails +';
+  });
+});
+
+/* Apparition au défilement */
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Lien de navigation actif */
+const sections = ['profil', 'competences', 'projets'].map(id => document.getElementById(id));
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const link = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+    if (!link) return;
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('is-active'));
+    link.classList.add('is-active');
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+sections.forEach(s => s && spy.observe(s));
+</script>
+
 </body>
 </html>
